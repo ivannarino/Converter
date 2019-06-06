@@ -1,7 +1,8 @@
-package io.github.ivannarino.android.codingchallenge
+package io.github.ivannarino.android.codingchallenge.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import io.github.ivannarino.android.codingchallenge.R
 
 class MainActivity : AppCompatActivity() {
 
