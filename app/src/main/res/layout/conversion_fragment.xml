@@ -52,7 +52,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="@{() -> vm.convert(textInputLayout.editText.text.toString())}"
+                    android:onClick="@{() -> vm.convert(context, textInputLayout.editText.text.toString())}"
                     android:text="@string/convert" />
 
             </LinearLayout>

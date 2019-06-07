@@ -1,4 +1,4 @@
-package io.github.ivannarino.android.codingchallenge.presentation
+package io.github.ivannarino.android.codingchallenge.presentation.util
 
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
