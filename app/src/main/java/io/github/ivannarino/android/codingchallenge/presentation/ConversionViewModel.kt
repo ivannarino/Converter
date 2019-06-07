@@ -7,6 +7,7 @@ import io.github.ivannarino.android.codingchallenge.data.CurrencyDb
 import io.github.ivannarino.android.codingchallenge.data.CurrencyWs
 import io.github.ivannarino.android.codingchallenge.domain.CurrencyRepository
 import io.github.ivannarino.android.codingchallenge.domain.model.Conversion
+import io.github.ivannarino.android.codingchallenge.presentation.CurrencyApp.Companion.CONVERT_CURRENCIES
 import io.github.ivannarino.android.codingchallenge.presentation.CurrencyApp.Companion.DEFAULT_CURRENCY
 
 class ConversionViewModel : ViewModel() {
@@ -17,8 +18,11 @@ class ConversionViewModel : ViewModel() {
 
     fun getConversionStateData(): LiveData<Conversion> = conversionStateData
 
-    fun convert(value: Int) {
-        val currencyConversions = currencyRepository.getCurrencyConversions(value.toBigDecimal(), DEFAULT_CURRENCY, listOf("GBP", "EUR", "JPY", "BRL"))
-        conversionStateData.value = currencyConversions
+    fun convert(value: String) {
+        value.toBigIntegerOrNull()?.let {
+            val currencyConversions = currencyRepository.getCurrencyConversions(value.toBigDecimal(), DEFAULT_CURRENCY, CONVERT_CURRENCIES)
+            conversionStateData.value = currencyConversions
+        }
+
     }
 }

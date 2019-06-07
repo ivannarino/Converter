@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Coding Challenge</string>
+    <string name="amount_in_currency">Amount in %s</string>
+    <string name="convert">Convert</string>
 </resources>
