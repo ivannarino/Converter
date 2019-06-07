@@ -1,4 +1,4 @@
-# Mobile Coding Challenge
+# Mobile Coding Challenge [![Build Status](https://travis-ci.com/ivannarino/Converter.svg?branch=master)](https://travis-ci.com/ivannarino/Converter)
 
 An Army of Ones <> Currency Converter
 
@@ -8,14 +8,14 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-Android Studio 3.4
+Android Studio 3.4.1
 
 ## Building
 
 In order to build the application, run the following command 
 
 ```
-./gradlew clean assemble
+./gradlew assemble
 ```
 
 ## Running the tests
@@ -23,20 +23,27 @@ In order to build the application, run the following command
 For the unit tests, run
 
 ```
-./gradlew check
+./gradlew testDebugUnitTest
 ```
 
 And for the instrumented tests, run
 
 ```
-./gradlew connectedCheck
+./gradlew connectedAndroidTest
 ```
+
+## Screenshots
+
+![Landscape](art/device-2019-06-07-144919.png)
+
+![Portrait](art/device-2019-06-07-144943.png)
+
 
 ## Authors
 
-* **Ivan Nariño Del Castillo** - *Initial work* - [About me](https://ivannarino.github.io)
+* **Ivan Nariño Del Castillo** - [About me](https://ivannarino.github.io)
 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License.
