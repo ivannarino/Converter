@@ -1,6 +1,7 @@
 package io.github.ivannarino.android.codingchallenge.presentation.util
 
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.components.AxisBase
@@ -22,6 +23,7 @@ fun HorizontalBarChart.setChartData(conversionData: Conversion?) {
     conversionData?.let {
         xAxis.valueFormatter = CurrencyFormatter(conversionData)
         xAxis.labelCount = conversionData.conversions.size
+        xAxis.typeface = ResourcesCompat.getFont(context, R.font.huge_agb_v5)
 
         val values = conversionData.conversions.mapIndexed { index, amount ->
             BarEntry(index.toFloat(), amount.value.toFloat())
@@ -34,6 +36,7 @@ fun HorizontalBarChart.setChartData(conversionData: Conversion?) {
         } else {
             val barDataSet = BarDataSet(values, DATASET_NAME)
             barDataSet.color = ContextCompat.getColor(context, R.color.colorPrimary)
+            barDataSet.valueTypeface = ResourcesCompat.getFont(context, R.font.huge_agb_v5)
             barDataSet.valueFormatter = CurrencyFormatter(conversionData)
             barDataSet.setDrawIcons(false)
 

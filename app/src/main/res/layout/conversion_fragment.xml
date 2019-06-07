@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/horizontal_material_spacing"
             android:layout_marginRight="@dimen/horizontal_material_spacing"
-            android:layout_marginTop="@dimen/horizontal_material_spacing"
+            android:layout_marginTop="@dimen/common_8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -39,7 +39,10 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/horizontal_material_spacing">
+                    android:layout_marginBottom="@dimen/common_8dp"
+                    android:layout_marginEnd="@dimen/horizontal_material_spacing"
+                    android:layout_marginTop="@dimen/common_8dp"
+                    app:hintEnabled="false">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/amountEditText"
