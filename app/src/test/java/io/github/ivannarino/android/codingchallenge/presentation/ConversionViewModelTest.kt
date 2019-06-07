@@ -9,6 +9,7 @@ import io.github.ivannarino.android.codingchallenge.presentation.util.hideSoftKe
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.mockkStatic
+import io.mockk.unmockkAll
 import io.mockk.verify
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
@@ -34,6 +35,11 @@ class ConversionViewModelTest : AutoCloseKoinTest() {
             single(named(CurrencyApp.MAIN_THREAD_SCHEDULER), override = true) { Schedulers.trampoline() }
         }))
         currencyViewModel = ConversionViewModel(currencyRepository, ApplicationProvider.getApplicationContext())
+    }
+
+    @After
+    fun tearDown() {
+        unmockkAll()
     }
 
     @Test

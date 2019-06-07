@@ -2,6 +2,9 @@ package io.github.ivannarino.android.codingchallenge.data
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import io.github.ivannarino.android.codingchallenge.domain.model.Amount
+import io.github.ivannarino.android.codingchallenge.domain.model.Conversion
+import io.github.ivannarino.android.codingchallenge.presentation.CurrencyApp.Companion.DEFAULT_CURRENCY
 import io.github.ivannarino.android.codingchallenge.presentation.CurrencyApp.Companion.FIXER_IO_ACCESS_KEY
 import io.reactivex.Flowable
 import retrofit2.Retrofit
@@ -10,8 +13,20 @@ import retrofit2.http.Query
 
 class CurrencyWs(private val retrofitClient: Retrofit) {
 
-    fun getCurrencyConversions(currencies: List<String>): Flowable<CurrencyResult> {
-        return retrofitClient.create(CurrencyApi::class.java).getCurrencyConversions(FIXER_IO_ACCESS_KEY, currencies.joinToString(separator = ","))
+    fun getCurrencyConversions(baseCurrency: String, currencies: List<String>): Flowable<Conversion> {
+        // trick to change the baseCurrency to USD because Fixer.io cannot let you change the baseCurrency in the free plan
+        return retrofitClient.create(CurrencyApi::class.java).getCurrencyConversions(FIXER_IO_ACCESS_KEY,
+                (currencies + DEFAULT_CURRENCY).joinToString(separator = ",")).map { currencyResult ->
+            val euroToDefaultCurrency = currencyResult.rates.getValue(DEFAULT_CURRENCY)
+            val conversionsWithoutDefaultCurrency =
+                    currencyResult.copy(rates = currencyResult.rates.filterNot { it.key == DEFAULT_CURRENCY })
+
+            Conversion(Amount(baseCurrency, 1.toBigDecimal()),
+                    conversionsWithoutDefaultCurrency.rates.map {
+                        Amount(it.key, it.value.toBigDecimal() / euroToDefaultCurrency.toBigDecimal()
+                        )
+                    })
+        }
     }
 }
 
