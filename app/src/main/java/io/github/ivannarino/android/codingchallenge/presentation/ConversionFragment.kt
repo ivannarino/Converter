@@ -6,24 +6,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.components.XAxis.XAxisPosition
 import io.github.ivannarino.android.codingchallenge.R
 import io.github.ivannarino.android.codingchallenge.databinding.ConversionFragmentBinding
 import io.github.ivannarino.android.codingchallenge.presentation.CurrencyApp.Companion.X_AXIS_GRANULARITY
-import kotlinx.android.synthetic.main.conversion_fragment.chart
+import kotlinx.android.synthetic.main.conversion_fragment.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ConversionFragment : Fragment() {
 
-    private lateinit var viewModel: ConversionViewModel
+    private val conversationViewModel: ConversionViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val binding: ConversionFragmentBinding = DataBindingUtil.inflate(inflater, R.layout.conversion_fragment, container, false)
+        val binding: ConversionFragmentBinding =
+            DataBindingUtil.inflate(inflater, R.layout.conversion_fragment, container, false)
 
-        viewModel = ViewModelProviders.of(this).get(ConversionViewModel::class.java)
         binding.lifecycleOwner = this
-        binding.vm = viewModel
+        binding.vm = conversationViewModel
 
         return binding.root
     }

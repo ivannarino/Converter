@@ -1,29 +1,15 @@
 package io.github.ivannarino.android.codingchallenge.data
 
-import androidx.room.Dao
-import androidx.room.Database
-import androidx.room.Entity
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.PrimaryKey
-import androidx.room.Query
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.ToJson
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import io.github.ivannarino.android.codingchallenge.domain.model.Conversion
-import io.github.ivannarino.android.codingchallenge.presentation.CurrencyApp.Companion.DB_NAME
-import io.github.ivannarino.android.codingchallenge.presentation.CurrencyApp.Companion.appContext
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import java.math.BigDecimal
 
-class CurrencyDb {
-
-    private val currencyDatabase = Room.databaseBuilder(appContext, CurrencyDatabase::class.java, DB_NAME).build()
-    private val moshi = Moshi.Builder().add(BigDecimalAdapter()).add(KotlinJsonAdapterFactory()).build()
+class CurrencyDb(private val moshi: Moshi, private val currencyDatabase: CurrencyDatabase) {
 
     fun getCurrencyConversions(baseCurrency: String, currencies: List<String>): Flowable<Conversion> {
         return currencyDatabase.currencyConversionDao().getCurrencyConversion(baseCurrency,

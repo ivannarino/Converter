@@ -3,21 +3,12 @@ package io.github.ivannarino.android.codingchallenge.data
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import io.github.ivannarino.android.codingchallenge.presentation.CurrencyApp.Companion.FIXER_IO_ACCESS_KEY
-import io.github.ivannarino.android.codingchallenge.presentation.CurrencyApp.Companion.FIXER_IO_BASE_URL
 import io.reactivex.Observable
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-class CurrencyWs {
-
-    private val retrofitClient = Retrofit.Builder()
-            .baseUrl(FIXER_IO_BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
+class CurrencyWs(private val retrofitClient: Retrofit) {
 
     fun getCurrencyConversions(currencies: List<String>): Observable<CurrencyResult> {
         return retrofitClient.create(CurrencyApi::class.java).getCurrencyConversions(FIXER_IO_ACCESS_KEY, currencies.joinToString(separator = ","))
